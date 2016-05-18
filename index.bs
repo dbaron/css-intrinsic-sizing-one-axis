@@ -4,8 +4,86 @@ Status: UD
 Shortname: css-intrinsic-sizing-one-axis
 ED: http://dbaron.github.io/css-intrinsic-sizing-one-axis/
 Editor: L. David Baron, Mozilla https://www.mozilla.org/, http://dbaron.org/
-Abstract: This is a proposal for changes to concepts defined in [[CSS-SIZING-3]], [[CSS3-MULTICOL]], [[CSS-FLEXBOX-1]], and [[CSS-GRID-1]] to avoid having intrinsic sizes depend on layout, by instead having intrinsic sizes exist only in the axis (horizontal or vertical) that is not the axis in which the largest units of new content are placed.
+Abstract: This is a proposal for changes to concepts defined in [[CSS-SIZING-3]], [[CSS-SIZING-4]], [[CSS3-MULTICOL]], [[CSS-FLEXBOX-1]], and [[CSS-GRID-1]] to avoid having intrinsic sizes depend on layout, by instead having intrinsic sizes exist only in the axis (horizontal or vertical) that is not the axis in which the largest units of new content are placed.
+</pre>
+<!-- terms auto-link to this, but I need to add it manually to cite [[CSS-SIZING-4]] explicitly! -->
+<pre class="biblio">
+{
+    "CSS-SIZING-4": {
+        "authors": [
+            "Tab Atkins Jr.",
+            "Elika Etemad"
+        ],
+        "href": "https://drafts.csswg.org/css-sizing-4/",
+        "title": "CSS Intrinsic & Extrinsic Sizing Module Level 4",
+        "status": "ED",
+        "publisher": "W3C"
+    }
+}
 </pre>
 
 Introduction {#introduction}
-============================
+============
+
+Document layout algorithms historically use
+one dimension (for Latin script, the width) as an input
+and the other dimension (for Latin script, the height) as an output.
+The width is determined from the size of the page,
+and content is placed within that width until lines wrap, and lines
+are stacked until they fill the necessary amount of height
+(possibly broken across pages).
+This means the heights are a function of the content, but the widths are not.
+
+Some layout concepts also depend on widths that are a function of the content,
+known as <dfn>intrinsic widths</dfn>.
+Historically CSS layout concepts defined in [[CSS21]] (such as tables, floats,
+and absolute positioning) have depended on two such widths, even though
+the rules for computing them were not defined in [[CSS21]].
+The larger width is conceptually the largest width
+that an element (and its descendants) can take up
+without wasting width,
+and the smaller is the narrowest that the element (and its descendants)
+can be without causing overflow.
+These widths could be computed in an entirely separate pass prior to
+the layout calculations that compute position and size.
+Some implementations have this assumption built deeply into their architecture,
+and depend on it for efficient performance.
+(Note that the notion of whether intrisic width calculations are
+a fully separate pass is distinct from whether intrinsic width calculations
+use layout-like algorithms, which is something that implementations differ
+on.
+Some implementations (IE, Edge) compute positions in order to perform
+intrinsic width calculations around floats,
+but other implementations (WebKit, Gecko, Chromium) do not.)
+
+[[CSS-SIZING-3]] calls these widths the <a>min-content size</a>
+and the <a>max-content size</a>, but defines them (contrary to prior practice)
+as existing in both dimensions.
+I believe that this was done for various reasons,
+such as defining behavior for <a>orthogonal flows</a>,
+and providing particular desired behaviors for various use cases
+with multicolumn layout and flexbox.
+The definition of the intrinsic size in one dimension
+is often defined to depend on layout,
+which requires performing a full relayout
+in order to compute the intrinsic size,
+in order to then do layout at a different size.
+This both performs work that is unnecessary and
+is incompatible with the design of existing software.
+
+I believe that these use cases can be addressed in a different way
+that is both simpler and more efficient.
+This is by defining the intrinsic sizes to exist only in one axis
+(the axis that is not the one in which the highest-level subunits of
+an element progress),
+and then defining the sizing algorithms to use intrinsic sizes
+in a way appropriate to that definition.
+
+Axis of highest-level progression {#highest-axis}
+=================================
+
+Defining intrinsic sizes {#intrinsic-size-definitions}
+========================
+
+Defining sizing algorithms {#sizing-definitions}
+==========================

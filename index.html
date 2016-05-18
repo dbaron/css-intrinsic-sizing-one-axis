@@ -1323,14 +1323,23 @@ Parts of this work may be from another specification document.  If so, those par
   </div>
   <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
   <div class="p-summary" data-fill-with="abstract">
-   <p>This is a proposal for changes to concepts defined in <a data-link-type="biblio" href="#biblio-css-sizing-3">[CSS-SIZING-3]</a>, <a data-link-type="biblio" href="#biblio-css3-multicol">[CSS3-MULTICOL]</a>, <a data-link-type="biblio" href="#biblio-css-flexbox-1">[CSS-FLEXBOX-1]</a>, and <a data-link-type="biblio" href="#biblio-css-grid-1">[CSS-GRID-1]</a> to avoid having intrinsic sizes depend on layout, by instead having intrinsic sizes exist only in the axis (horizontal or vertical) that is not the axis in which the largest units of new content are placed.</p>
+   <p>This is a proposal for changes to concepts defined in <a data-link-type="biblio" href="#biblio-css-sizing-3">[CSS-SIZING-3]</a>, <a data-link-type="biblio" href="#biblio-css-sizing-4">[CSS-SIZING-4]</a>, <a data-link-type="biblio" href="#biblio-css3-multicol">[CSS3-MULTICOL]</a>, <a data-link-type="biblio" href="#biblio-css-flexbox-1">[CSS-FLEXBOX-1]</a>, and <a data-link-type="biblio" href="#biblio-css-grid-1">[CSS-GRID-1]</a> to avoid having intrinsic sizes depend on layout, by instead having intrinsic sizes exist only in the axis (horizontal or vertical) that is not the axis in which the largest units of new content are placed.</p>
   </div>
   <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
     <li><a href="#introduction"><span class="secno">1</span> <span class="content">Introduction</span></a>
+    <li><a href="#highest-axis"><span class="secno">2</span> <span class="content">Axis of highest-level progression</span></a>
+    <li><a href="#intrinsic-size-definitions"><span class="secno">3</span> <span class="content">Defining intrinsic sizes</span></a>
+    <li><a href="#sizing-definitions"><span class="secno">4</span> <span class="content">Defining sizing algorithms</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
+    <li>
+     <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
+     <ol class="toc">
+      <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
+      <li><a href="#index-defined-elsewhere"><span class="secno"></span> <span class="content">Terms defined by reference</span></a>
+     </ol>
     <li>
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ol class="toc">
@@ -1341,6 +1350,58 @@ Parts of this work may be from another specification document.  If so, those par
   </nav>
   <main>
    <h2 class="heading settled" data-level="1" id="introduction"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#introduction"></a></h2>
+   <p>Document layout algorithms historically use
+one dimension (for Latin script, the width) as an input
+and the other dimension (for Latin script, the height) as an output.
+The width is determined from the size of the page,
+and content is placed within that width until lines wrap, and lines
+are stacked until they fill the necessary amount of height
+(possibly broken across pages).
+This means the heights are a function of the content, but the widths are not.</p>
+   <p>Some layout concepts also depend on widths that are a function of the content,
+known as <dfn data-dfn-type="dfn" data-noexport="" id="intrinsic-widths">intrinsic widths<a class="self-link" href="#intrinsic-widths"></a></dfn>.
+Historically CSS layout concepts defined in <a data-link-type="biblio" href="#biblio-css21">[CSS21]</a> (such as tables, floats,
+and absolute positioning) have depended on two such widths, even though
+the rules for computing them were not defined in <a data-link-type="biblio" href="#biblio-css21">[CSS21]</a>.
+The larger width is conceptually the largest width
+that an element (and its descendants) can take up
+without wasting width,
+and the smaller is the narrowest that the element (and its descendants)
+can be without causing overflow.
+These widths could be computed in an entirely separate pass prior to
+the layout calculations that compute position and size.
+Some implementations have this assumption built deeply into their architecture,
+and depend on it for efficient performance.
+(Note that the notion of whether intrisic width calculations are
+a fully separate pass is distinct from whether intrinsic width calculations
+use layout-like algorithms, which is something that implementations differ
+on.
+Some implementations (IE, Edge) compute positions in order to perform
+intrinsic width calculations around floats,
+but other implementations (WebKit, Gecko, Chromium) do not.)</p>
+   <p><a data-link-type="biblio" href="#biblio-css-sizing-3">[CSS-SIZING-3]</a> calls these widths the <a data-link-type="dfn" href="https://drafts.csswg.org/css-sizing-4/#min-content">min-content size</a> and the <a data-link-type="dfn" href="https://drafts.csswg.org/css-sizing-4/#max-content">max-content size</a>, but defines them (contrary to prior practice)
+as existing in both dimensions.
+I believe that this was done for various reasons,
+such as defining behavior for <a data-link-type="dfn" href="https://drafts.csswg.org/css-writing-modes-3/#establish-an-orthogonal-flow">orthogonal flows</a>,
+and providing particular desired behaviors for various use cases
+with multicolumn layout and flexbox.
+The definition of the intrinsic size in one dimension
+is often defined to depend on layout,
+which requires performing a full relayout
+in order to compute the intrinsic size,
+in order to then do layout at a different size.
+This both performs work that is unnecessary and
+is incompatible with the design of existing software.</p>
+   <p>I believe that these use cases can be addressed in a different way
+that is both simpler and more efficient.
+This is by defining the intrinsic sizes to exist only in one axis
+(the axis that is not the one in which the highest-level subunits of
+an element progress),
+and then defining the sizing algorithms to use intrinsic sizes
+in a way appropriate to that definition.</p>
+   <h2 class="heading settled" data-level="2" id="highest-axis"><span class="secno">2. </span><span class="content">Axis of highest-level progression</span><a class="self-link" href="#highest-axis"></a></h2>
+   <h2 class="heading settled" data-level="3" id="intrinsic-size-definitions"><span class="secno">3. </span><span class="content">Defining intrinsic sizes</span><a class="self-link" href="#intrinsic-size-definitions"></a></h2>
+   <h2 class="heading settled" data-level="4" id="sizing-definitions"><span class="secno">4. </span><span class="content">Defining sizing algorithms</span><a class="self-link" href="#sizing-definitions"></a></h2>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
@@ -1488,9 +1549,32 @@ Parts of this work may be from another specification document.  If so, those par
 
 })();
 </script>
+  <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
+  <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
+  <ul class="index">
+   <li><a href="#intrinsic-widths">intrinsic widths</a><span>, in §1</span>
+  </ul>
+  <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
+  <ul class="index">
+   <li>
+    <a data-link-type="biblio">[CSS-SIZING-4]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-sizing-4/#max-content">max-content size</a>
+     <li><a href="https://drafts.csswg.org/css-sizing-4/#min-content">min-content size</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[css-writing-modes-3]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-writing-modes-3/#establish-an-orthogonal-flow">orthogonal flow</a>
+    </ul>
+  </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
+   <dt id="biblio-css-sizing-4">[CSS-SIZING-4]
+   <dd>Tab Atkins Jr.; Elika Etemad. <a href="https://drafts.csswg.org/css-sizing-4/">CSS Intrinsic &amp; Extrinsic Sizing Module Level 4</a>. ED. URL: <a href="https://drafts.csswg.org/css-sizing-4/">https://drafts.csswg.org/css-sizing-4/</a>
+   <dt id="biblio-css-writing-modes-3">[CSS-WRITING-MODES-3]
+   <dd>Elika Etemad; Koji Ishii. <a href="http://dev.w3.org/csswg/css-writing-modes-3/">CSS Writing Modes Level 3</a>. 15 December 2015. CR. URL: <a href="http://dev.w3.org/csswg/css-writing-modes-3/">http://dev.w3.org/csswg/css-writing-modes-3/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
   </dl>
@@ -1502,6 +1586,8 @@ Parts of this work may be from another specification document.  If so, those par
    <dd>Tab Atkins Jr.; Elika Etemad; Rossen Atanassov. <a href="http://dev.w3.org/csswg/css-grid/">CSS Grid Layout Module Level 1</a>. 17 September 2015. WD. URL: <a href="http://dev.w3.org/csswg/css-grid/">http://dev.w3.org/csswg/css-grid/</a>
    <dt id="biblio-css-sizing-3">[CSS-SIZING-3]
    <dd>Tab Atkins Jr.; Elika Etemad. <a href="https://drafts.csswg.org/css-sizing">CSS Intrinsic &amp; Extrinsic Sizing Module Level 3</a>. 12 May 2016. WD. URL: <a href="https://drafts.csswg.org/css-sizing">https://drafts.csswg.org/css-sizing</a>
+   <dt id="biblio-css21">[CSS21]
+   <dd>Bert Bos; et al. <a href="http://www.w3.org/TR/CSS2">Cascading Style Sheets Level 2 Revision 1 (CSS 2.1) Specification</a>. 7 June 2011. REC. URL: <a href="http://www.w3.org/TR/CSS2">http://www.w3.org/TR/CSS2</a>
    <dt id="biblio-css3-multicol">[CSS3-MULTICOL]
    <dd>Håkon Wium Lie. <a href="http://www.w3.org/TR/css3-multicol">CSS Multi-column Layout Module</a>. 12 April 2011. CR. URL: <a href="http://www.w3.org/TR/css3-multicol">http://www.w3.org/TR/css3-multicol</a>
   </dl>
