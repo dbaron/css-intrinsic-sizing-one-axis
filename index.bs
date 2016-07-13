@@ -88,3 +88,11 @@ Defining intrinsic sizes {#intrinsic-size-definitions}
 
 Defining sizing algorithms {#sizing-definitions}
 ==========================
+
+Use cases {#use-cases}
+=========
+
+Issue: Need to get a list of use cases that led to
+the current rules that this proposal is trying to replace,
+and work through (and refine) the above rules to explain
+how they also handle those use cases in a reasonable way.
