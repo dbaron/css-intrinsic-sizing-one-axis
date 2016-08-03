@@ -102,7 +102,7 @@ the new line is placed below the previous lines
 In this inline case,
 smaller units of content are placed in a rightwards progression,
 and larger units of content are placed in a downwards progression.
-Thus the <dfn>largest-unit progression</dfn> of CSS inline layout
+Thus the <dfn>axis of largest-unit progression</dfn> of CSS inline layout
 for English is downwards.
 
 The largest-unit progression of other layout systems is defined similarly,
@@ -120,6 +120,18 @@ For example:
 
 Defining intrinsic sizes {#intrinsic-size-definitions}
 ========================
+
+The current approach in [[CSS-SIZING-3]] is
+to define intirinsic sizes
+(the <a>min-content size</a>
+and the <a>max-content size</a>) in both dimensions
+(horizontal and vertical),
+no matter what layout system and 'writing-mode' are being used.
+
+I propose instead that the intrinsic sizes for a layout primitive
+instead be defined only in the axis (horizontal or vertical)
+that is <em>not</em> that layout system's
+<span>axis of largest-unit progression</span>.
 
 Defining sizing algorithms {#sizing-definitions}
 ==========================

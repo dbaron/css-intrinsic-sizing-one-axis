@@ -1431,7 +1431,7 @@ the new line is placed below the previous lines
 In this inline case,
 smaller units of content are placed in a rightwards progression,
 and larger units of content are placed in a downwards progression.
-Thus the <dfn data-dfn-type="dfn" data-noexport="" id="largest-unit-progression">largest-unit progression<a class="self-link" href="#largest-unit-progression"></a></dfn> of CSS inline layout
+Thus the <dfn data-dfn-type="dfn" data-noexport="" id="axis-of-largest-unit-progression">axis of largest-unit progression<a class="self-link" href="#axis-of-largest-unit-progression"></a></dfn> of CSS inline layout
 for English is downwards.</p>
    <p>The largest-unit progression of other layout systems is defined similarly,
 as the direction in which the largest units of new content are placed.
@@ -1449,6 +1449,14 @@ since later columns are placed to the right of previous columns,
 and columns are a larger unit than blocks or inline elements.</p>
    </ul>
    <h2 class="heading settled" data-level="3" id="intrinsic-size-definitions"><span class="secno">3. </span><span class="content">Defining intrinsic sizes</span><a class="self-link" href="#intrinsic-size-definitions"></a></h2>
+   <p>The current approach in <a data-link-type="biblio" href="#biblio-css-sizing-3">[CSS-SIZING-3]</a> is
+to define intirinsic sizes
+(the <a data-link-type="dfn" href="https://drafts.csswg.org/css-sizing-4/#min-content">min-content size</a> and the <a data-link-type="dfn" href="https://drafts.csswg.org/css-sizing-4/#max-content">max-content size</a>) in both dimensions
+(horizontal and vertical),
+no matter what layout system and <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-writing-modes-3/#propdef-writing-mode">writing-mode</a> are being used.</p>
+   <p>I propose instead that the intrinsic sizes for a layout primitive
+instead be defined only in the axis (horizontal or vertical)
+that is <em>not</em> that layout system’s <span>axis of largest-unit progression</span>.</p>
    <h2 class="heading settled" data-level="4" id="sizing-definitions"><span class="secno">4. </span><span class="content">Defining sizing algorithms</span><a class="self-link" href="#sizing-definitions"></a></h2>
    <h2 class="heading settled" data-level="5" id="use-cases"><span class="secno">5. </span><span class="content">Use cases</span><a class="self-link" href="#use-cases"></a></h2>
    <p class="issue" id="issue-bed42f23"><a class="self-link" href="#issue-bed42f23"></a> Need to get a list of use cases that led to
@@ -1588,8 +1596,8 @@ how they also handle those use cases in a reasonable way.</p>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
+   <li><a href="#axis-of-largest-unit-progression">axis of largest-unit progression</a><span>, in §2</span>
    <li><a href="#intrinsic-widths">intrinsic widths</a><span>, in §1</span>
-   <li><a href="#largest-unit-progression">largest-unit progression</a><span>, in §2</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
