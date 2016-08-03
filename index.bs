@@ -148,7 +148,10 @@ Issue: write
 Flex {#intrinsic-size-flex}
 ----
 
-Issue: write
+Issue: write.  Note that this can do sensible things in many cases when
+some dimensions (e.g., height, column-width, column-count) are specified.
+In the cases where not enough of them are specified to do something useful,
+it seems likely that the result doesn't need to be particularly useful anyway.
 
 Orthogonal layout {#intrinsic-size-orthogonal}
 -----------------
