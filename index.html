@@ -1344,7 +1344,14 @@ Parts of this work may be from another specification document.  If so, those par
    <ol class="toc" role="directory">
     <li><a href="#introduction"><span class="secno">1</span> <span class="content">Introduction</span></a>
     <li><a href="#largest-unit-axis"><span class="secno">2</span> <span class="content">Axis of largest-unit progression</span></a>
-    <li><a href="#intrinsic-size-definitions"><span class="secno">3</span> <span class="content">Defining intrinsic sizes</span></a>
+    <li>
+     <a href="#intrinsic-size-definitions"><span class="secno">3</span> <span class="content">Defining intrinsic sizes</span></a>
+     <ol class="toc">
+      <li><a href="#intrinsic-size-block"><span class="secno">3.1</span> <span class="content">Block and Table</span></a>
+      <li><a href="#intrinsic-size-multicol"><span class="secno">3.2</span> <span class="content">Multi-column</span></a>
+      <li><a href="#intrinsic-size-flex"><span class="secno">3.3</span> <span class="content">Flex</span></a>
+      <li><a href="#intrinsic-size-orthogonal"><span class="secno">3.4</span> <span class="content">Orthogonal layout</span></a>
+     </ol>
     <li><a href="#sizing-definitions"><span class="secno">4</span> <span class="content">Defining sizing algorithms</span></a>
     <li><a href="#use-cases"><span class="secno">5</span> <span class="content">Use cases</span></a>
     <li>
@@ -1457,7 +1464,28 @@ no matter what layout system and <a class="property" data-link-type="propdesc" h
    <p>I propose instead that the intrinsic sizes for a layout primitive
 instead be defined only in the axis (horizontal or vertical)
 that is <em>not</em> that layout system’s <span>axis of largest-unit progression</span>.</p>
+   <h3 class="heading settled" data-level="3.1" id="intrinsic-size-block"><span class="secno">3.1. </span><span class="content">Block and Table</span><a class="self-link" href="#intrinsic-size-block"></a></h3>
+   <p>Intrinsic sizes of the layout primitives in <a data-link-type="biblio" href="#biblio-css21">[CSS21]</a>, <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-block">block</a> and <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-display-3/#valdef-display-table">table</a>,
+are defined as they always have been.</p>
+   <h3 class="heading settled" data-level="3.2" id="intrinsic-size-multicol"><span class="secno">3.2. </span><span class="content">Multi-column</span><a class="self-link" href="#intrinsic-size-multicol"></a></h3>
+   <p class="issue" id="issue-efb2a684"><a class="self-link" href="#issue-efb2a684"></a> write</p>
+   <h3 class="heading settled" data-level="3.3" id="intrinsic-size-flex"><span class="secno">3.3. </span><span class="content">Flex</span><a class="self-link" href="#intrinsic-size-flex"></a></h3>
+   <p class="issue" id="issue-efb2a6840"><a class="self-link" href="#issue-efb2a6840"></a> write</p>
+   <h3 class="heading settled" data-level="3.4" id="intrinsic-size-orthogonal"><span class="secno">3.4. </span><span class="content">Orthogonal layout</span><a class="self-link" href="#intrinsic-size-orthogonal"></a></h3>
+   <p>Computing an intrinsic size in the presence of orthogonal layout
+is interesting, although with the definitions above, the relevant
+cases that are interesting
+are no longer when the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-writing-modes-3/#propdef-writing-mode">writing-mode</a> of the parent is orthogonal
+to the <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-writing-modes-3/#propdef-writing-mode">writing-mode</a> of the child,
+but instead now when the <span>axis of largest-unit progression</span> of the parent is orthogonal to
+the <span>axis of largest-unit progression</span> of the child.</p>
+   <p>In these cases, the parent needs to define its intrinsic size
+in a dimension in which the child does not have an intrinsic size.</p>
+   <p class="issue" id="issue-e1f318dc"><a class="self-link" href="#issue-e1f318dc"></a> write (I believe the sizing definitions can be written
+so the answer here doesn’t matter that much as long as it’s defined)</p>
    <h2 class="heading settled" data-level="4" id="sizing-definitions"><span class="secno">4. </span><span class="content">Defining sizing algorithms</span><a class="self-link" href="#sizing-definitions"></a></h2>
+   <p class="issue" id="issue-a7aae87d"><a class="self-link" href="#issue-a7aae87d"></a> write about how the sizing algorithms use the intrinsic sizes,
+particularly for orthogonal flows, flexbox, and grid</p>
    <h2 class="heading settled" data-level="5" id="use-cases"><span class="secno">5. </span><span class="content">Use cases</span><a class="self-link" href="#use-cases"></a></h2>
    <p class="issue" id="issue-bed42f23"><a class="self-link" href="#issue-bed42f23"></a> Need to get a list of use cases that led to
 the current rules that this proposal is trying to replace,
@@ -1602,6 +1630,12 @@ how they also handle those use cases in a reasonable way.</p>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
+    <a data-link-type="biblio">[css-display-3]</a> defines the following terms:
+    <ul>
+     <li><a href="https://drafts.csswg.org/css-display-3/#valdef-display-block">block</a>
+     <li><a href="https://drafts.csswg.org/css-display-3/#valdef-display-table">table</a>
+    </ul>
+   <li>
     <a data-link-type="biblio">[CSS-SIZING-4]</a> defines the following terms:
     <ul>
      <li><a href="https://drafts.csswg.org/css-sizing-4/#max-content">max-content size</a>
@@ -1620,6 +1654,8 @@ how they also handle those use cases in a reasonable way.</p>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
+   <dt id="biblio-css-display-3">[CSS-DISPLAY-3]
+   <dd>Tab Atkins Jr.; Elika Etemad. <a href="http://dev.w3.org/csswg/css-display/">CSS Display Module Level 3</a>. 15 October 2015. WD. URL: <a href="http://dev.w3.org/csswg/css-display/">http://dev.w3.org/csswg/css-display/</a>
    <dt id="biblio-css-sizing-4">[CSS-SIZING-4]
    <dd>Tab Atkins Jr.; Elika Etemad. <a href="https://drafts.csswg.org/css-sizing-4/">CSS Intrinsic &amp; Extrinsic Sizing Module Level 4</a>. ED. URL: <a href="https://drafts.csswg.org/css-sizing-4/">https://drafts.csswg.org/css-sizing-4/</a>
    <dt id="biblio-css-writing-modes-3">[CSS-WRITING-MODES-3]
@@ -1640,6 +1676,12 @@ how they also handle those use cases in a reasonable way.</p>
   </dl>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
+   <div class="issue"> write<a href="#issue-efb2a684"> ↵ </a></div>
+   <div class="issue"> write<a href="#issue-efb2a6840"> ↵ </a></div>
+   <div class="issue"> write (I believe the sizing definitions can be written
+so the answer here doesn’t matter that much as long as it’s defined)<a href="#issue-e1f318dc"> ↵ </a></div>
+   <div class="issue"> write about how the sizing algorithms use the intrinsic sizes,
+particularly for orthogonal flows, flexbox, and grid<a href="#issue-a7aae87d"> ↵ </a></div>
    <div class="issue"> Need to get a list of use cases that led to
 the current rules that this proposal is trying to replace,
 and work through (and refine) the above rules to explain

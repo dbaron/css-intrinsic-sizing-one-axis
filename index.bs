@@ -133,8 +133,47 @@ instead be defined only in the axis (horizontal or vertical)
 that is <em>not</em> that layout system's
 <span>axis of largest-unit progression</span>.
 
+Block and Table {#intrinsic-size-block}
+---------------
+
+Intrinsic sizes of the layout primitives in [[CSS21]],
+''display/block'' and ''display/table'',
+are defined as they always have been.
+
+Multi-column {#intrinsic-size-multicol}
+------------
+
+Issue: write
+
+Flex {#intrinsic-size-flex}
+----
+
+Issue: write
+
+Orthogonal layout {#intrinsic-size-orthogonal}
+-----------------
+
+Computing an intrinsic size in the presence of orthogonal layout
+is interesting, although with the definitions above, the relevant
+cases that are interesting
+are no longer when the 'writing-mode' of the parent is orthogonal
+to the 'writing-mode' of the child,
+but instead now when the <span>axis of largest-unit progression</span>
+of the parent is orthogonal to
+the <span>axis of largest-unit progression</span> of the child.
+
+In these cases, the parent needs to define its intrinsic size
+in a dimension in which the child does not have an intrinsic size.
+
+Issue: write (I believe the sizing definitions can be written
+so the answer here doesn't matter that much as long as it's defined)
+
+
 Defining sizing algorithms {#sizing-definitions}
 ==========================
+
+Issue: write about how the sizing algorithms use the intrinsic sizes,
+particularly for orthogonal flows, flexbox, and grid
 
 Use cases {#use-cases}
 =========
