@@ -1343,7 +1343,7 @@ Parts of this work may be from another specification document.  If so, those par
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
     <li><a href="#introduction"><span class="secno">1</span> <span class="content">Introduction</span></a>
-    <li><a href="#highest-axis"><span class="secno">2</span> <span class="content">Axis of highest-level progression</span></a>
+    <li><a href="#largest-unit-axis"><span class="secno">2</span> <span class="content">Axis of largest-unit progression</span></a>
     <li><a href="#intrinsic-size-definitions"><span class="secno">3</span> <span class="content">Defining intrinsic sizes</span></a>
     <li><a href="#sizing-definitions"><span class="secno">4</span> <span class="content">Defining sizing algorithms</span></a>
     <li><a href="#use-cases"><span class="secno">5</span> <span class="content">Use cases</span></a>
@@ -1409,11 +1409,45 @@ is incompatible with the design of existing software.</p>
    <p>I believe that these use cases can be addressed in a different way
 that is both simpler and more efficient.
 This is by defining the intrinsic sizes to exist only in one axis
-(the axis that is not the one in which the highest-level subunits of
+(the axis that is not the one in which the largest subunits of
 an element progress),
 and then defining the sizing algorithms to use intrinsic sizes
 in a way appropriate to that definition.</p>
-   <h2 class="heading settled" data-level="2" id="highest-axis"><span class="secno">2. </span><span class="content">Axis of highest-level progression</span><a class="self-link" href="#highest-axis"></a></h2>
+   <h2 class="heading settled" data-level="2" id="largest-unit-axis"><span class="secno">2. </span><span class="content">Axis of largest-unit progression</span><a class="self-link" href="#largest-unit-axis"></a></h2>
+   <p>One interesting question to ask about a layout system is:
+if I add more content to the end of an element,
+where is it positioned relative to the content that was already there?</p>
+   <p>In block layout for English content
+(i.e., <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-writing-modes-3/#propdef-direction">direction</a> is <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-writing-modes-3/#valdef-direction-ltr">ltr</a> and <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-writing-modes-3/#propdef-writing-mode">writing-mode</a> is <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-writing-modes-3/#valdef-writing-mode-horizontal-tb">horizontal-tb</a>),
+a later block is placed below earlier blocks
+(a downwards progression).
+But inline layout for English content is a little bit more complicated:
+later content is placed to the right of the earlier content
+(a rightwards progression),
+except when the later content would overflow the line,
+then a new line is formed and
+the new line is placed below the previous lines
+(a downwards progression).
+In this inline case,
+smaller units of content are placed in a rightwards progression,
+and larger units of content are placed in a downwards progression.
+Thus the <dfn data-dfn-type="dfn" data-noexport="" id="largest-unit-progression">largest-unit progression<a class="self-link" href="#largest-unit-progression"></a></dfn> of CSS inline layout
+for English is downwards.</p>
+   <p>The largest-unit progression of other layout systems is defined similarly,
+as the direction in which the largest units of new content are placed.
+For example:</p>
+   <ul>
+    <li data-md="">
+     <p>For block or inline layout in vertical Japanese
+(with <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-writing-modes-3/#propdef-writing-mode">writing-mode</a> being <span class="css">tb-rl</span>),
+the largest-unit progression is leftwards,
+since later blocks or new lines are placed to the left of earlier ones.</p>
+    <li data-md="">
+     <p>For multi-column layout <a data-link-type="biblio" href="#biblio-css3-multicol">[CSS3-MULTICOL]</a> in English,
+the largest-unit progression is rightwards,
+since later columns are placed to the right of previous columns,
+and columns are a larger unit than blocks or inline elements.</p>
+   </ul>
    <h2 class="heading settled" data-level="3" id="intrinsic-size-definitions"><span class="secno">3. </span><span class="content">Defining intrinsic sizes</span><a class="self-link" href="#intrinsic-size-definitions"></a></h2>
    <h2 class="heading settled" data-level="4" id="sizing-definitions"><span class="secno">4. </span><span class="content">Defining sizing algorithms</span><a class="self-link" href="#sizing-definitions"></a></h2>
    <h2 class="heading settled" data-level="5" id="use-cases"><span class="secno">5. </span><span class="content">Use cases</span><a class="self-link" href="#use-cases"></a></h2>
@@ -1555,6 +1589,7 @@ how they also handle those use cases in a reasonable way.</p>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
    <li><a href="#intrinsic-widths">intrinsic widths</a><span>, in §1</span>
+   <li><a href="#largest-unit-progression">largest-unit progression</a><span>, in §2</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
@@ -1567,7 +1602,11 @@ how they also handle those use cases in a reasonable way.</p>
    <li>
     <a data-link-type="biblio">[css-writing-modes-3]</a> defines the following terms:
     <ul>
+     <li><a href="https://drafts.csswg.org/css-writing-modes-3/#propdef-direction">direction</a>
+     <li><a href="https://drafts.csswg.org/css-writing-modes-3/#valdef-writing-mode-horizontal-tb">horizontal-tb</a>
+     <li><a href="https://drafts.csswg.org/css-writing-modes-3/#valdef-direction-ltr">ltr</a>
      <li><a href="https://drafts.csswg.org/css-writing-modes-3/#establish-an-orthogonal-flow">orthogonal flow</a>
+     <li><a href="https://drafts.csswg.org/css-writing-modes-3/#propdef-writing-mode">writing-mode</a>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>

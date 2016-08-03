@@ -75,13 +75,48 @@ is incompatible with the design of existing software.
 I believe that these use cases can be addressed in a different way
 that is both simpler and more efficient.
 This is by defining the intrinsic sizes to exist only in one axis
-(the axis that is not the one in which the highest-level subunits of
+(the axis that is not the one in which the largest subunits of
 an element progress),
 and then defining the sizing algorithms to use intrinsic sizes
 in a way appropriate to that definition.
 
-Axis of highest-level progression {#highest-axis}
+Axis of largest-unit progression {#largest-unit-axis}
 =================================
+
+One interesting question to ask about a layout system is:
+if I add more content to the end of an element,
+where is it positioned relative to the content that was already there?
+
+In block layout for English content
+(i.e., 'direction' is ''direction/ltr'' and
+'writing-mode' is ''writing-mode/horizontal-tb''),
+a later block is placed below earlier blocks
+(a downwards progression).
+But inline layout for English content is a little bit more complicated:
+later content is placed to the right of the earlier content
+(a rightwards progression),
+except when the later content would overflow the line,
+then a new line is formed and
+the new line is placed below the previous lines
+(a downwards progression).
+In this inline case,
+smaller units of content are placed in a rightwards progression,
+and larger units of content are placed in a downwards progression.
+Thus the <dfn>largest-unit progression</dfn> of CSS inline layout
+for English is downwards.
+
+The largest-unit progression of other layout systems is defined similarly,
+as the direction in which the largest units of new content are placed.
+For example:
+  * For block or inline layout in vertical Japanese
+    (with 'writing-mode' being ''writing-mode/tb-rl''),
+    the largest-unit progression is leftwards,
+    since later blocks or new lines are placed to the left of earlier ones.
+  * For multi-column layout [[CSS3-MULTICOL]] in English,
+    the largest-unit progression is rightwards,
+    since later columns are placed to the right of previous columns,
+    and columns are a larger unit than blocks or inline elements.
+
 
 Defining intrinsic sizes {#intrinsic-size-definitions}
 ========================
