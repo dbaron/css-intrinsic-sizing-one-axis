@@ -1,1 +1,1 @@
-http://dbaron.github.io/css-intrinsic-sizing-one-axis/
+https://dbaron.github.io/css-intrinsic-sizing-one-axis/

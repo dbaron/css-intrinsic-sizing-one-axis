@@ -414,6 +414,19 @@
 	 border-left: 0.5em solid #DEF;
 	}
 
+	/* Put nice boxes around each algorithm. */
+	[data-algorithm]:not(.heading) {
+	  padding: .5em;
+	  border: thin solid #ddd; border-radius: .5em;
+	  margin: .5em 0;
+	}
+	[data-algorithm]:not(.heading) > :first-child {
+	  margin-top: 0;
+	}
+	[data-algorithm]:not(.heading) > :last-child {
+	  margin-bottom: 0;
+	}
+
 	/* Style for switch/case <dl>s */
 	dl.switch > dd > ol.only,
 	dl.switch > dd > .only > ol {
@@ -457,7 +470,7 @@
 		font-style: normal;
 	}
 	dt dfn code, code.idl {
-		font-size: inherit;
+		font-size: normal;
 	}
 	dfn var {
 		font-style: normal;
@@ -955,6 +968,8 @@ Possible extra rowspan handling
 		/* Reverse color scheme */
 		color: black;
 		border-color: #3980B5;
+		border-bottom-width: 3px !important;
+		margin-bottom: 0px !important;
 	}
 	.toc a:visited {
 		border-color: #054572;
@@ -1161,7 +1176,7 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed 1.0.0" name="generator">
+  <meta content="Bikeshed version 176d39d5a285c04f57d2f0e078fa69273028eb45" name="generator">
 <style>/* style-md-lists */
 
             /* This is a weird hack for me not yet following the commonmark spec
@@ -1317,12 +1332,12 @@ Possible extra rowspan handling
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
-     <dd><a class="u-url" href="http://dbaron.github.io/css-intrinsic-sizing-one-axis/">http://dbaron.github.io/css-intrinsic-sizing-one-axis/</a>
+     <dd><a class="u-url" href="https://dbaron.github.io/css-intrinsic-sizing-one-axis/">https://dbaron.github.io/css-intrinsic-sizing-one-axis/</a>
      <dt>Issue Tracking:
      <dd><a href="https://github.com/dbaron/css-intrinsic-sizing-one-axis/issues/">GitHub</a>
      <dd><a href="#issues-index">Inline In Spec</a>
      <dt class="editor">Editor:
-     <dd class="editor p-author h-card vcard"><a class="p-name fn u-url url" href="http://dbaron.org/">L. David Baron</a> (<a class="p-org org" href="https://www.mozilla.org/">Mozilla</a>)
+     <dd class="editor p-author h-card vcard"><a class="p-name fn u-url url" href="https://dbaron.org/">L. David Baron</a> (<a class="p-org org" href="https://www.mozilla.org/">Mozilla</a>)
     </dl>
    </div>
    <div data-fill-with="warning"></div>
@@ -1658,20 +1673,20 @@ how they also handle those use cases in a reasonable way.</p>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-css-display-3">[CSS-DISPLAY-3]
-   <dd>Tab Atkins Jr.; Elika Etemad. <a href="http://dev.w3.org/csswg/css-display/">CSS Display Module Level 3</a>. 15 October 2015. WD. URL: <a href="http://dev.w3.org/csswg/css-display/">http://dev.w3.org/csswg/css-display/</a>
+   <dd>Tab Atkins Jr.; Elika Etemad. <a href="http://dev.w3.org/csswg/css-display/">CSS Display Module Level 3</a>. URL: <a href="http://dev.w3.org/csswg/css-display/">http://dev.w3.org/csswg/css-display/</a>
    <dt id="biblio-css-sizing-4">[CSS-SIZING-4]
    <dd>Tab Atkins Jr.; Elika Etemad. <a href="https://drafts.csswg.org/css-sizing-4/">CSS Intrinsic &amp; Extrinsic Sizing Module Level 4</a>. ED. URL: <a href="https://drafts.csswg.org/css-sizing-4/">https://drafts.csswg.org/css-sizing-4/</a>
    <dt id="biblio-css-writing-modes-3">[CSS-WRITING-MODES-3]
-   <dd>Elika Etemad; Koji Ishii. <a href="http://dev.w3.org/csswg/css-writing-modes-3/">CSS Writing Modes Level 3</a>. 15 December 2015. CR. URL: <a href="http://dev.w3.org/csswg/css-writing-modes-3/">http://dev.w3.org/csswg/css-writing-modes-3/</a>
+   <dd>Elika Etemad; Koji Ishii. <a href="http://dev.w3.org/csswg/css-writing-modes-3/">CSS Writing Modes Level 3</a>. URL: <a href="http://dev.w3.org/csswg/css-writing-modes-3/">http://dev.w3.org/csswg/css-writing-modes-3/</a>
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
    <dt id="biblio-css-flexbox-1">[CSS-FLEXBOX-1]
-   <dd>Tab Atkins Jr.; Elika Etemad; Rossen Atanassov. <a href="https://drafts.csswg.org/css-flexbox/">CSS Flexible Box Layout Module Level 1</a>. 26 May 2016. CR. URL: <a href="https://drafts.csswg.org/css-flexbox/">https://drafts.csswg.org/css-flexbox/</a>
+   <dd>Tab Atkins Jr.; Elika Etemad; Rossen Atanassov. <a href="https://drafts.csswg.org/css-flexbox/">CSS Flexible Box Layout Module Level 1</a>. URL: <a href="https://drafts.csswg.org/css-flexbox/">https://drafts.csswg.org/css-flexbox/</a>
    <dt id="biblio-css-grid-1">[CSS-GRID-1]
-   <dd>Tab Atkins Jr.; Elika Etemad; Rossen Atanassov. <a href="https://drafts.csswg.org/css-grid/">CSS Grid Layout Module Level 1</a>. 19 May 2016. WD. URL: <a href="https://drafts.csswg.org/css-grid/">https://drafts.csswg.org/css-grid/</a>
+   <dd>Tab Atkins Jr.; Elika Etemad; Rossen Atanassov. <a href="https://drafts.csswg.org/css-grid/">CSS Grid Layout Module Level 1</a>. URL: <a href="https://drafts.csswg.org/css-grid/">https://drafts.csswg.org/css-grid/</a>
    <dt id="biblio-css-sizing-3">[CSS-SIZING-3]
-   <dd>Tab Atkins Jr.; Elika Etemad. <a href="https://drafts.csswg.org/css-sizing">CSS Intrinsic &amp; Extrinsic Sizing Module Level 3</a>. 12 May 2016. WD. URL: <a href="https://drafts.csswg.org/css-sizing">https://drafts.csswg.org/css-sizing</a>
+   <dd>Tab Atkins Jr.; Elika Etemad. <a href="https://drafts.csswg.org/css-sizing">CSS Intrinsic &amp; Extrinsic Sizing Module Level 3</a>. URL: <a href="https://drafts.csswg.org/css-sizing">https://drafts.csswg.org/css-sizing</a>
    <dt id="biblio-css21">[CSS21]
    <dd>Bert Bos; et al. <a href="https://www.w3.org/TR/CSS2">Cascading Style Sheets Level 2 Revision 1 (CSS 2.1) Specification</a>. 7 June 2011. REC. URL: <a href="https://www.w3.org/TR/CSS2">https://www.w3.org/TR/CSS2</a>
    <dt id="biblio-css3-multicol">[CSS3-MULTICOL]

@@ -2,8 +2,8 @@
 <pre class="metadata">
 Status: DREAM
 Shortname: css-intrinsic-sizing-one-axis
-ED: http://dbaron.github.io/css-intrinsic-sizing-one-axis/
-Editor: L. David Baron, Mozilla https://www.mozilla.org/, http://dbaron.org/
+ED: https://dbaron.github.io/css-intrinsic-sizing-one-axis/
+Editor: L. David Baron, Mozilla https://www.mozilla.org/, https://dbaron.org/
 Abstract: This is a proposal for changes to concepts defined in [[CSS-SIZING-3]], [[CSS-SIZING-4]], [[CSS3-MULTICOL]], [[CSS-FLEXBOX-1]], and [[CSS-GRID-1]] to avoid having intrinsic sizes depend on layout, by instead having intrinsic sizes exist only in the axis (horizontal or vertical) that is not the axis in which the largest units of new content are placed.
 Boilerplate: omit conformance
 </pre>
